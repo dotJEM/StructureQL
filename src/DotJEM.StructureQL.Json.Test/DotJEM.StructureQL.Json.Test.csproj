@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="TestObjects\OpenSourceLicenses_Copyleft.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TestObjects\OpenSourceLicenses_Copyleft.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NUnit" Version="3.13.3" />
   </ItemGroup>
@@ -14,6 +23,10 @@
   <ItemGroup>
     <ProjectReference Include="..\DotJEM.StructureQL.Json\DotJEM.StructureQL.Json.csproj" />
     <ProjectReference Include="..\DotJEM.StructureQL\DotJEM.StructureQL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="TestObjects\OpenSourceLicenses_Copyleft.json" />
   </ItemGroup>
 
 </Project>
