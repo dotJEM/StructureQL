@@ -1,5 +1,4 @@
-short_version: 1.0.{build}
-version: short_version
+version: 1.0.{build}
 image: Visual Studio 2019
 
 configuration: Release
@@ -15,8 +14,8 @@ dotnet_csproj:
   file: '**\*.csproj'
   version: '{version}'
   package_version: '{version}'
-  assembly_version: '{short_version}.0'
-  file_version: '{short_version}.0'
+  assembly_version: '1.0.{build}.0'
+  file_version: '1.0.{build}.0'
   informational_version: '{version}'
 
 matrix:
