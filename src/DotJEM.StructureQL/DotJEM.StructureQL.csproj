@@ -3,12 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/dotJEM/StructureQL</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Grammar\**" />
     <EmbeddedResource Remove="Grammar\**" />
     <None Remove="Grammar\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="https:\github.com\dotJEM\StructureQL\blob\main\README.md" />
   </ItemGroup>
 
   <ItemGroup>
