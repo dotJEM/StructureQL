@@ -52,6 +52,16 @@ public interface IStructureQLListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitObject([NotNull] StructureQLParser.ObjectContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="StructureQLParser.array"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterArray([NotNull] StructureQLParser.ArrayContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="StructureQLParser.array"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitArray([NotNull] StructureQLParser.ArrayContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="StructureQLParser.property"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

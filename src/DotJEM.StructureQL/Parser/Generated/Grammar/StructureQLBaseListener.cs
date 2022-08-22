@@ -61,6 +61,18 @@ public partial class StructureQLBaseListener : IStructureQLListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitObject([NotNull] StructureQLParser.ObjectContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="StructureQLParser.array"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterArray([NotNull] StructureQLParser.ArrayContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="StructureQLParser.array"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitArray([NotNull] StructureQLParser.ArrayContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="StructureQLParser.property"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

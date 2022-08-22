@@ -45,6 +45,12 @@ public interface IStructureQLVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitObject([NotNull] StructureQLParser.ObjectContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="StructureQLParser.array"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArray([NotNull] StructureQLParser.ArrayContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="StructureQLParser.property"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

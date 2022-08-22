@@ -5,16 +5,6 @@ using NUnit.Framework;
 
 namespace DotJEM.StructureQL.Json.Test
 {
-
-    /*
-     * select: {*,person:{*,crew:**}}
-     *    *    = all values here
-     *    **   = all values recursively
-     *
-     *
-     * select: {*,person:*,person.crew:**}
-     *
-     */
     [TestFixture]
     public class FilterTests
     {
@@ -29,7 +19,6 @@ namespace DotJEM.StructureQL.Json.Test
 
             JObject filtered = testObj.Query(result);
             Console.WriteLine(filtered);
-
         }
     }
 
@@ -47,8 +36,8 @@ namespace DotJEM.StructureQL.Json.Test
             JObject filtered = testObj.Query(selector);
             Console.WriteLine(filtered);
         }
-
     }
+
     public class OpenSourceLucenses_CopyLeft_Tests
     {
         [TestCase("*")]
