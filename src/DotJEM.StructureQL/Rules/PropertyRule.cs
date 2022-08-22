@@ -18,4 +18,5 @@ public class PropertyStructureQuery : IStructureQuery
     public string Explain() => throw new NotImplementedException();
     public IStructureQuery For(string propertyName, bool isPrimitive) => throw new NotImplementedException();
     public bool Include(bool isPrimitive) => throw new NotImplementedException();
+    public bool IncludeIndex(int i) => throw new NotImplementedException();
 }

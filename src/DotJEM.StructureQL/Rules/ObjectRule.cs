@@ -37,9 +37,9 @@ public class ObjectStructureQuery : IStructureQuery
     public string Explain()
     {
         if(recursiveIncludeAll != null)
-            return "GROUP(RECURSIVE(*))";
+            return "OBJECT(RECURSIVE(*))";
 
-        StringBuilder explain = new("GROUP(");
+        StringBuilder explain = new("OBJECT(");
         bool mark = false;
         if (simpleIncludeAll != null)
         {
@@ -47,10 +47,12 @@ public class ObjectStructureQuery : IStructureQuery
             mark=true;
         }
 
-        foreach (IStructureQuery filter in properties.Values)
+        foreach (KeyValuePair<string, IStructureQuery> kv in properties)
         {
             if (mark) explain.Append(",");
-            explain.Append(filter.Explain());
+            explain.Append(kv.Key);
+            explain.Append("=");
+            explain.Append(kv.Value.Explain());
             mark=true;
         }
 
@@ -74,4 +76,5 @@ public class ObjectStructureQuery : IStructureQuery
     }
 
     public bool Include(bool isPrimitive) => true;
+    public bool IncludeIndex(int i) => false;
 }

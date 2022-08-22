@@ -22,11 +22,15 @@ namespace DotJEM.StructureQL
             ITokenStream tokenStream = new CommonTokenStream(lexer);
             StructureQLParser parser = new StructureQLParser(tokenStream);
 
+            CommonParserErrorListener errorCollector = new CommonParserErrorListener();
             lexer.RemoveErrorListeners();
+            lexer.AddErrorListener(errorCollector);
+
             parser.RemoveErrorListeners();
-            
-            CommonErrorListener errors = new CommonErrorListener();
-            parser.AddErrorListener(errors);
+            parser.AddErrorListener(errorCollector);
+
+            if (!errorCollector.IsValid)
+                throw new ArgumentException(errorCollector.ErrorMessage);
 
             return parser.query().Accept(new StructureQlVisitor());
         }

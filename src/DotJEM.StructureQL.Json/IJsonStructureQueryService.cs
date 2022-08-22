@@ -43,9 +43,12 @@ public class JsonStructureQueryService : IJsonStructureQueryService
     private JArray FilterArray(JArray array, IStructureQuery query)
     {
         JArray filteredArray = new JArray();
-        foreach (JToken token in array)
+        for (int i = 0; i < array.Count; i++)
         {
-            switch (token)
+            if(!query.IncludeIndex(i))
+                continue;
+            
+            switch (array[i])
             {
                 case JArray jArray:
                     filteredArray.Add(FilterArray(jArray, query));

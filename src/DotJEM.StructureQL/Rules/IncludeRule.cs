@@ -8,4 +8,5 @@ public class IncludeRule : IStructureQuery
     public IStructureQuery For(string propertyName, bool isPrimitive) => ExcludeStructureQuery.SharedInstance;
 
     public bool Include(bool isPrimitive) => true;
+    public bool IncludeIndex(int i) => true;
 }

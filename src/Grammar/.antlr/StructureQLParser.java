@@ -17,29 +17,28 @@ public class StructureQLParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, STRING=12, INTEGER=13, WS=14;
+		WS=10, INTEGER=11, STRING=12;
 	public static final int
-		RULE_query = 0, RULE_object = 1, RULE_array = 2, RULE_property = 3, RULE_match = 4, 
-		RULE_recursiveMatchAll = 5, RULE_simpleMatchAll = 6;
+		RULE_query = 0, RULE_array = 1, RULE_object = 2, RULE_property = 3, RULE_part = 4, 
+		RULE_match = 5, RULE_recursiveMatchAll = 6, RULE_simpleMatchAll = 7, RULE_number = 8;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"query", "object", "array", "property", "match", "recursiveMatchAll", 
-			"simpleMatchAll"
+			"query", "array", "object", "property", "part", "match", "recursiveMatchAll", 
+			"simpleMatchAll", "number"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'{'", "','", "'}'", "'['", "'..'", "']'", "'[..'", "'..]'", "':'", 
-			"'**'", "'*'"
+			null, "'['", "'..'", "']'", "'{'", "','", "'}'", "':'", "'**'", "'*'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, null, null, 
-			"STRING", "INTEGER", "WS"
+			null, null, null, null, null, null, null, null, null, null, "WS", "INTEGER", 
+			"STRING"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -110,27 +109,94 @@ public class StructureQLParser extends Parser {
 		QueryContext _localctx = new QueryContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_query);
 		try {
-			setState(16);
+			setState(20);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__9:
-			case T__10:
+			case T__7:
+			case T__8:
 			case STRING:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(14);
+				setState(18);
 				match();
 				}
 				break;
-			case T__0:
+			case T__3:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(15);
+				setState(19);
 				object();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ArrayContext extends ParserRuleContext {
+		public NumberContext lower;
+		public NumberContext upper;
+		public PartContext elementQuery;
+		public PartContext part() {
+			return getRuleContext(PartContext.class,0);
+		}
+		public List<NumberContext> number() {
+			return getRuleContexts(NumberContext.class);
+		}
+		public NumberContext number(int i) {
+			return getRuleContext(NumberContext.class,i);
+		}
+		public ArrayContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_array; }
+	}
+
+	public final ArrayContext array() throws RecognitionException {
+		ArrayContext _localctx = new ArrayContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_array);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(22);
+			match(T__0);
+			setState(24);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==INTEGER) {
+				{
+				setState(23);
+				((ArrayContext)_localctx).lower = number();
+				}
+			}
+
+			setState(26);
+			match(T__1);
+			setState(28);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==INTEGER) {
+				{
+				setState(27);
+				((ArrayContext)_localctx).upper = number();
+				}
+			}
+
+			setState(30);
+			match(T__2);
+			setState(31);
+			((ArrayContext)_localctx).elementQuery = part();
 			}
 		}
 		catch (RecognitionException re) {
@@ -159,103 +225,33 @@ public class StructureQLParser extends Parser {
 
 	public final ObjectContext object() throws RecognitionException {
 		ObjectContext _localctx = new ObjectContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_object);
+		enterRule(_localctx, 4, RULE_object);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(18);
-			match(T__0);
-			setState(19);
+			setState(33);
+			match(T__3);
+			setState(34);
 			match();
-			setState(24);
+			setState(39);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__1) {
+			while (_la==T__4) {
 				{
 				{
-				setState(20);
-				match(T__1);
-				setState(21);
+				setState(35);
+				match(T__4);
+				setState(36);
 				match();
 				}
 				}
-				setState(26);
+				setState(41);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(27);
-			match(T__2);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class ArrayContext extends ParserRuleContext {
-		public Token lower;
-		public Token upper;
-		public List<TerminalNode> INTEGER() { return getTokens(StructureQLParser.INTEGER); }
-		public TerminalNode INTEGER(int i) {
-			return getToken(StructureQLParser.INTEGER, i);
-		}
-		public ArrayContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_array; }
-	}
-
-	public final ArrayContext array() throws RecognitionException {
-		ArrayContext _localctx = new ArrayContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_array);
-		try {
-			setState(40);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(29);
-				match(T__3);
-				setState(30);
-				((ArrayContext)_localctx).lower = match(INTEGER);
-				setState(31);
-				match(T__4);
-				setState(32);
-				((ArrayContext)_localctx).upper = match(INTEGER);
-				setState(33);
-				match(T__5);
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(34);
-				match(T__6);
-				setState(35);
-				((ArrayContext)_localctx).upper = match(INTEGER);
-				setState(36);
-				match(T__5);
-				}
-				break;
-			case 3:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(37);
-				match(T__3);
-				setState(38);
-				((ArrayContext)_localctx).lower = match(INTEGER);
-				setState(39);
-				match(T__7);
-				}
-				break;
+			setState(42);
+			match(T__5);
 			}
 		}
 		catch (RecognitionException re) {
@@ -271,17 +267,8 @@ public class StructureQLParser extends Parser {
 
 	public static class PropertyContext extends ParserRuleContext {
 		public TerminalNode STRING() { return getToken(StructureQLParser.STRING, 0); }
-		public RecursiveMatchAllContext recursiveMatchAll() {
-			return getRuleContext(RecursiveMatchAllContext.class,0);
-		}
-		public SimpleMatchAllContext simpleMatchAll() {
-			return getRuleContext(SimpleMatchAllContext.class,0);
-		}
-		public ObjectContext object() {
-			return getRuleContext(ObjectContext.class,0);
-		}
-		public ArrayContext array() {
-			return getRuleContext(ArrayContext.class,0);
+		public PartContext part() {
+			return getRuleContext(PartContext.class,0);
 		}
 		public PropertyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -293,56 +280,96 @@ public class StructureQLParser extends Parser {
 		PropertyContext _localctx = new PropertyContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_property);
 		try {
-			setState(51);
+			setState(48);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(42);
+				setState(44);
 				match(STRING);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(43);
+				setState(45);
 				match(STRING);
-				setState(44);
-				match(T__8);
-				setState(49);
-				_errHandler.sync(this);
-				switch (_input.LA(1)) {
-				case T__9:
-					{
-					setState(45);
-					recursiveMatchAll();
-					}
-					break;
-				case T__10:
-					{
-					setState(46);
-					simpleMatchAll();
-					}
-					break;
-				case T__0:
-					{
-					setState(47);
-					object();
-					}
-					break;
-				case T__3:
-				case T__6:
-					{
-					setState(48);
-					array();
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
-				}
+				setState(46);
+				match(T__6);
+				setState(47);
+				part();
 				}
 				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class PartContext extends ParserRuleContext {
+		public RecursiveMatchAllContext recursiveMatchAll() {
+			return getRuleContext(RecursiveMatchAllContext.class,0);
+		}
+		public SimpleMatchAllContext simpleMatchAll() {
+			return getRuleContext(SimpleMatchAllContext.class,0);
+		}
+		public ArrayContext array() {
+			return getRuleContext(ArrayContext.class,0);
+		}
+		public ObjectContext object() {
+			return getRuleContext(ObjectContext.class,0);
+		}
+		public PartContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_part; }
+	}
+
+	public final PartContext part() throws RecognitionException {
+		PartContext _localctx = new PartContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_part);
+		try {
+			setState(54);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__7:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(50);
+				recursiveMatchAll();
+				}
+				break;
+			case T__8:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(51);
+				simpleMatchAll();
+				}
+				break;
+			case T__0:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(52);
+				array();
+				}
+				break;
+			case T__3:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(53);
+				object();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -374,29 +401,29 @@ public class StructureQLParser extends Parser {
 
 	public final MatchContext match() throws RecognitionException {
 		MatchContext _localctx = new MatchContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_match);
+		enterRule(_localctx, 10, RULE_match);
 		try {
-			setState(56);
+			setState(59);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__9:
+			case T__7:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(53);
+				setState(56);
 				recursiveMatchAll();
 				}
 				break;
-			case T__10:
+			case T__8:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(54);
+				setState(57);
 				simpleMatchAll();
 				}
 				break;
 			case STRING:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(55);
+				setState(58);
 				property();
 				}
 				break;
@@ -424,12 +451,12 @@ public class StructureQLParser extends Parser {
 
 	public final RecursiveMatchAllContext recursiveMatchAll() throws RecognitionException {
 		RecursiveMatchAllContext _localctx = new RecursiveMatchAllContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_recursiveMatchAll);
+		enterRule(_localctx, 12, RULE_recursiveMatchAll);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
-			match(T__9);
+			setState(61);
+			match(T__7);
 			}
 		}
 		catch (RecognitionException re) {
@@ -452,12 +479,41 @@ public class StructureQLParser extends Parser {
 
 	public final SimpleMatchAllContext simpleMatchAll() throws RecognitionException {
 		SimpleMatchAllContext _localctx = new SimpleMatchAllContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_simpleMatchAll);
+		enterRule(_localctx, 14, RULE_simpleMatchAll);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(60);
-			match(T__10);
+			setState(63);
+			match(T__8);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class NumberContext extends ParserRuleContext {
+		public TerminalNode INTEGER() { return getToken(StructureQLParser.INTEGER, 0); }
+		public NumberContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_number; }
+	}
+
+	public final NumberContext number() throws RecognitionException {
+		NumberContext _localctx = new NumberContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_number);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(65);
+			match(INTEGER);
 			}
 		}
 		catch (RecognitionException re) {
@@ -472,23 +528,24 @@ public class StructureQLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20A\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\5\2\23\n\2\3\3\3\3"+
-		"\3\3\3\3\7\3\31\n\3\f\3\16\3\34\13\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3"+
-		"\4\3\4\3\4\3\4\3\4\5\4+\n\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5\64\n\5\5\5"+
-		"\66\n\5\3\6\3\6\3\6\5\6;\n\6\3\7\3\7\3\b\3\b\3\b\2\2\t\2\4\6\b\n\f\16"+
-		"\2\2\2C\2\22\3\2\2\2\4\24\3\2\2\2\6*\3\2\2\2\b\65\3\2\2\2\n:\3\2\2\2\f"+
-		"<\3\2\2\2\16>\3\2\2\2\20\23\5\n\6\2\21\23\5\4\3\2\22\20\3\2\2\2\22\21"+
-		"\3\2\2\2\23\3\3\2\2\2\24\25\7\3\2\2\25\32\5\n\6\2\26\27\7\4\2\2\27\31"+
-		"\5\n\6\2\30\26\3\2\2\2\31\34\3\2\2\2\32\30\3\2\2\2\32\33\3\2\2\2\33\35"+
-		"\3\2\2\2\34\32\3\2\2\2\35\36\7\5\2\2\36\5\3\2\2\2\37 \7\6\2\2 !\7\17\2"+
-		"\2!\"\7\7\2\2\"#\7\17\2\2#+\7\b\2\2$%\7\t\2\2%&\7\17\2\2&+\7\b\2\2\'("+
-		"\7\6\2\2()\7\17\2\2)+\7\n\2\2*\37\3\2\2\2*$\3\2\2\2*\'\3\2\2\2+\7\3\2"+
-		"\2\2,\66\7\16\2\2-.\7\16\2\2.\63\7\13\2\2/\64\5\f\7\2\60\64\5\16\b\2\61"+
-		"\64\5\4\3\2\62\64\5\6\4\2\63/\3\2\2\2\63\60\3\2\2\2\63\61\3\2\2\2\63\62"+
-		"\3\2\2\2\64\66\3\2\2\2\65,\3\2\2\2\65-\3\2\2\2\66\t\3\2\2\2\67;\5\f\7"+
-		"\28;\5\16\b\29;\5\b\5\2:\67\3\2\2\2:8\3\2\2\2:9\3\2\2\2;\13\3\2\2\2<="+
-		"\7\f\2\2=\r\3\2\2\2>?\7\r\2\2?\17\3\2\2\2\b\22\32*\63\65:";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\16F\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\5\2"+
+		"\27\n\2\3\3\3\3\5\3\33\n\3\3\3\3\3\5\3\37\n\3\3\3\3\3\3\3\3\4\3\4\3\4"+
+		"\3\4\7\4(\n\4\f\4\16\4+\13\4\3\4\3\4\3\5\3\5\3\5\3\5\5\5\63\n\5\3\6\3"+
+		"\6\3\6\3\6\5\69\n\6\3\7\3\7\3\7\5\7>\n\7\3\b\3\b\3\t\3\t\3\n\3\n\3\n\2"+
+		"\2\13\2\4\6\b\n\f\16\20\22\2\2\2F\2\26\3\2\2\2\4\30\3\2\2\2\6#\3\2\2\2"+
+		"\b\62\3\2\2\2\n8\3\2\2\2\f=\3\2\2\2\16?\3\2\2\2\20A\3\2\2\2\22C\3\2\2"+
+		"\2\24\27\5\f\7\2\25\27\5\6\4\2\26\24\3\2\2\2\26\25\3\2\2\2\27\3\3\2\2"+
+		"\2\30\32\7\3\2\2\31\33\5\22\n\2\32\31\3\2\2\2\32\33\3\2\2\2\33\34\3\2"+
+		"\2\2\34\36\7\4\2\2\35\37\5\22\n\2\36\35\3\2\2\2\36\37\3\2\2\2\37 \3\2"+
+		"\2\2 !\7\5\2\2!\"\5\n\6\2\"\5\3\2\2\2#$\7\6\2\2$)\5\f\7\2%&\7\7\2\2&("+
+		"\5\f\7\2\'%\3\2\2\2(+\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*,\3\2\2\2+)\3\2\2\2"+
+		",-\7\b\2\2-\7\3\2\2\2.\63\7\16\2\2/\60\7\16\2\2\60\61\7\t\2\2\61\63\5"+
+		"\n\6\2\62.\3\2\2\2\62/\3\2\2\2\63\t\3\2\2\2\649\5\16\b\2\659\5\20\t\2"+
+		"\669\5\4\3\2\679\5\6\4\28\64\3\2\2\28\65\3\2\2\28\66\3\2\2\28\67\3\2\2"+
+		"\29\13\3\2\2\2:>\5\16\b\2;>\5\20\t\2<>\5\b\5\2=:\3\2\2\2=;\3\2\2\2=<\3"+
+		"\2\2\2>\r\3\2\2\2?@\7\n\2\2@\17\3\2\2\2AB\7\13\2\2B\21\3\2\2\2CD\7\r\2"+
+		"\2D\23\3\2\2\2\t\26\32\36)\628=";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

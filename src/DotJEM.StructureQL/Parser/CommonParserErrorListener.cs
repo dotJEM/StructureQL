@@ -6,11 +6,10 @@ using Antlr4.Runtime.Sharpen;
 
 namespace DotJEM.StructureQL.Parser;
 
-public class CommonErrorListener : BaseErrorListener
+public class CommonParserErrorListener : BaseErrorListener, IAntlrErrorListener<int>
 {
     public bool IsValid { get; private set; } = true;
     public int ErrorLocation { get; private set; } = -1;
-
     public string ErrorMessage { get; private set; }
 
     public override void ReportAmbiguity(Antlr4.Runtime.Parser recognizer, DFA dfa, int startIndex, int stopIndex, bool exact, BitSet ambigAlts, ATNConfigSet configs)
@@ -29,6 +28,13 @@ public class CommonErrorListener : BaseErrorListener
     }
 
     public override void SyntaxError(TextWriter output, IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
+    {
+        IsValid = false;
+        ErrorLocation = ErrorLocation == -1 ? charPositionInLine : ErrorLocation;
+        ErrorMessage = msg;
+    }
+
+    public void SyntaxError(TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
     {
         IsValid = false;
         ErrorLocation = ErrorLocation == -1 ? charPositionInLine : ErrorLocation;

@@ -6,4 +6,5 @@ public class RecursiveIncludeAllRule : IStructureQuery
     public string Explain() => "RECURSIVE(*)";
     public IStructureQuery For(string propertyName, bool isPrimitive)=> this;
     public bool Include(bool isPrimitive) => true;
+    public bool IncludeIndex(int i) => true;
 }

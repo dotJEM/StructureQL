@@ -49,18 +49,6 @@ public partial class StructureQLBaseListener : IStructureQLListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitQuery([NotNull] StructureQLParser.QueryContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="StructureQLParser.object"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterObject([NotNull] StructureQLParser.ObjectContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="StructureQLParser.object"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitObject([NotNull] StructureQLParser.ObjectContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="StructureQLParser.array"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -73,6 +61,18 @@ public partial class StructureQLBaseListener : IStructureQLListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitArray([NotNull] StructureQLParser.ArrayContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="StructureQLParser.object"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterObject([NotNull] StructureQLParser.ObjectContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="StructureQLParser.object"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitObject([NotNull] StructureQLParser.ObjectContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="StructureQLParser.property"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -84,6 +84,18 @@ public partial class StructureQLBaseListener : IStructureQLListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitProperty([NotNull] StructureQLParser.PropertyContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="StructureQLParser.part"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPart([NotNull] StructureQLParser.PartContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="StructureQLParser.part"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPart([NotNull] StructureQLParser.PartContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="StructureQLParser.match"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -120,6 +132,18 @@ public partial class StructureQLBaseListener : IStructureQLListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitSimpleMatchAll([NotNull] StructureQLParser.SimpleMatchAllContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="StructureQLParser.number"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNumber([NotNull] StructureQLParser.NumberContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="StructureQLParser.number"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNumber([NotNull] StructureQLParser.NumberContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

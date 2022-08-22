@@ -1,24 +1,24 @@
 grammar StructureQL;
 
-//
-
 query
     : match | object
+    ;
+
+array
+    : '[' (lower=number)? '..' (upper=number)? ']' elementQuery=part
     ;
 
 object
     : '{' match (',' match)* '}' 
     ;
 
-array
-    : '['   lower=INTEGER '..' upper=INTEGER ']'
-    | '[..'                    upper=INTEGER ']'
-    | '['   lower=INTEGER '..]'
-    ;
-
 property
     : STRING
-    | STRING ':' ( recursiveMatchAll | simpleMatchAll | object | array )
+    | STRING ':' part
+    ;
+
+part
+    : recursiveMatchAll | simpleMatchAll | array | object
     ;
 
 match
@@ -33,6 +33,10 @@ simpleMatchAll
     : '*'
     ;
 
+number
+    : INTEGER
+    ;
+
 /* ================================================================ *
  * =                     LEXER                                    = *
  * ================================================================ */
@@ -40,12 +44,8 @@ simpleMatchAll
 // DOUBLE_STAR: '**';
 // SINGLE_STAR: '*';
 
-STRING 
-    : CHAR+
-    ;
-
-INTEGER 
-    : NUM+
+fragment DIGIT        
+    : '0' .. '9'
     ;
 
 fragment ESC
@@ -53,23 +53,15 @@ fragment ESC
     ;
 
 fragment CHAR
-    : ~( ' ' | '\t' | '\n' | '\r' | '\u3000' | '*' | '{' | '}' | '[' | ']' | ':' | ',' )
-    ;
-
-fragment UNICODE
-   : 'u' HEX HEX HEX HEX
-   ;
-
-fragment HEX
-   : [0-9a-fA-F]
-   ;
-
-fragment SAFECODEPOINT
-   : ~ ["\\\u0000-\u001F]
-   ;
-
-fragment NUM        
-    : '0' .. '9'
+    : ~( ' ' | '\t' | '\n' | '\r' | '\u3000' | '*' | '{' | '}' | '[' | ']' | ':' | ',' | '.' )
     ;
 
 WS : (' '|'\t'|'\r'|'\n'|'\u3000') -> skip;
+
+INTEGER 
+    : DIGIT+
+    ;
+
+STRING 
+    : CHAR+
+    ;

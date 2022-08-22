@@ -39,23 +39,29 @@ public interface IStructureQLVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitQuery([NotNull] StructureQLParser.QueryContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="StructureQLParser.object"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitObject([NotNull] StructureQLParser.ObjectContext context);
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="StructureQLParser.array"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitArray([NotNull] StructureQLParser.ArrayContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="StructureQLParser.object"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitObject([NotNull] StructureQLParser.ObjectContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="StructureQLParser.property"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitProperty([NotNull] StructureQLParser.PropertyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="StructureQLParser.part"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPart([NotNull] StructureQLParser.PartContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="StructureQLParser.match"/>.
 	/// </summary>
@@ -74,5 +80,11 @@ public interface IStructureQLVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitSimpleMatchAll([NotNull] StructureQLParser.SimpleMatchAllContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="StructureQLParser.number"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNumber([NotNull] StructureQLParser.NumberContext context);
 }
 } // namespace DotJEM.StructureQL.Generated.Parser

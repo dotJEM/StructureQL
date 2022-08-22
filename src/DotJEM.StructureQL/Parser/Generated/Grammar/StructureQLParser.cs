@@ -38,22 +38,21 @@ public partial class StructureQLParser : Parser {
 	protected static PredictionContextCache sharedContextCache = new PredictionContextCache();
 	public const int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, STRING=12, INTEGER=13, WS=14;
+		WS=10, INTEGER=11, STRING=12;
 	public const int
-		RULE_query = 0, RULE_object = 1, RULE_array = 2, RULE_property = 3, RULE_match = 4, 
-		RULE_recursiveMatchAll = 5, RULE_simpleMatchAll = 6;
+		RULE_query = 0, RULE_array = 1, RULE_object = 2, RULE_property = 3, RULE_part = 4, 
+		RULE_match = 5, RULE_recursiveMatchAll = 6, RULE_simpleMatchAll = 7, RULE_number = 8;
 	public static readonly string[] ruleNames = {
-		"query", "object", "array", "property", "match", "recursiveMatchAll", 
-		"simpleMatchAll"
+		"query", "array", "object", "property", "part", "match", "recursiveMatchAll", 
+		"simpleMatchAll", "number"
 	};
 
 	private static readonly string[] _LiteralNames = {
-		null, "'{'", "','", "'}'", "'['", "'..'", "']'", "'[..'", "'..]'", "':'", 
-		"'**'", "'*'"
+		null, "'['", "'..'", "']'", "'{'", "','", "'}'", "':'", "'**'", "'*'"
 	};
 	private static readonly string[] _SymbolicNames = {
-		null, null, null, null, null, null, null, null, null, null, null, null, 
-		"STRING", "INTEGER", "WS"
+		null, null, null, null, null, null, null, null, null, null, "WS", "INTEGER", 
+		"STRING"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -122,27 +121,112 @@ public partial class StructureQLParser : Parser {
 		QueryContext _localctx = new QueryContext(Context, State);
 		EnterRule(_localctx, 0, RULE_query);
 		try {
-			State = 16;
+			State = 20;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
-			case T__9:
-			case T__10:
+			case T__7:
+			case T__8:
 			case STRING:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 14;
+				State = 18;
 				match();
 				}
 				break;
-			case T__0:
+			case T__3:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 15;
+				State = 19;
 				@object();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ArrayContext : ParserRuleContext {
+		public NumberContext lower;
+		public NumberContext upper;
+		public PartContext elementQuery;
+		[System.Diagnostics.DebuggerNonUserCode] public PartContext part() {
+			return GetRuleContext<PartContext>(0);
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public NumberContext[] number() {
+			return GetRuleContexts<NumberContext>();
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public NumberContext number(int i) {
+			return GetRuleContext<NumberContext>(i);
+		}
+		public ArrayContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_array; } }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			IStructureQLListener typedListener = listener as IStructureQLListener;
+			if (typedListener != null) typedListener.EnterArray(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			IStructureQLListener typedListener = listener as IStructureQLListener;
+			if (typedListener != null) typedListener.ExitArray(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IStructureQLVisitor<TResult> typedVisitor = visitor as IStructureQLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArray(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ArrayContext array() {
+		ArrayContext _localctx = new ArrayContext(Context, State);
+		EnterRule(_localctx, 2, RULE_array);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 22;
+			Match(T__0);
+			State = 24;
+			ErrorHandler.Sync(this);
+			_la = TokenStream.LA(1);
+			if (_la==INTEGER) {
+				{
+				State = 23;
+				_localctx.lower = number();
+				}
+			}
+
+			State = 26;
+			Match(T__1);
+			State = 28;
+			ErrorHandler.Sync(this);
+			_la = TokenStream.LA(1);
+			if (_la==INTEGER) {
+				{
+				State = 27;
+				_localctx.upper = number();
+				}
+			}
+
+			State = 30;
+			Match(T__2);
+			State = 31;
+			_localctx.elementQuery = part();
 			}
 		}
 		catch (RecognitionException re) {
@@ -189,121 +273,33 @@ public partial class StructureQLParser : Parser {
 	[RuleVersion(0)]
 	public ObjectContext @object() {
 		ObjectContext _localctx = new ObjectContext(Context, State);
-		EnterRule(_localctx, 2, RULE_object);
+		EnterRule(_localctx, 4, RULE_object);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 18;
-			Match(T__0);
-			State = 19;
+			State = 33;
+			Match(T__3);
+			State = 34;
 			match();
-			State = 24;
+			State = 39;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			while (_la==T__1) {
+			while (_la==T__4) {
 				{
 				{
-				State = 20;
-				Match(T__1);
-				State = 21;
+				State = 35;
+				Match(T__4);
+				State = 36;
 				match();
 				}
 				}
-				State = 26;
+				State = 41;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
-			State = 27;
-			Match(T__2);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class ArrayContext : ParserRuleContext {
-		public IToken lower;
-		public IToken upper;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] INTEGER() { return GetTokens(StructureQLParser.INTEGER); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode INTEGER(int i) {
-			return GetToken(StructureQLParser.INTEGER, i);
-		}
-		public ArrayContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_array; } }
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			IStructureQLListener typedListener = listener as IStructureQLListener;
-			if (typedListener != null) typedListener.EnterArray(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			IStructureQLListener typedListener = listener as IStructureQLListener;
-			if (typedListener != null) typedListener.ExitArray(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IStructureQLVisitor<TResult> typedVisitor = visitor as IStructureQLVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitArray(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public ArrayContext array() {
-		ArrayContext _localctx = new ArrayContext(Context, State);
-		EnterRule(_localctx, 4, RULE_array);
-		try {
-			State = 40;
-			ErrorHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(TokenStream,2,Context) ) {
-			case 1:
-				EnterOuterAlt(_localctx, 1);
-				{
-				State = 29;
-				Match(T__3);
-				State = 30;
-				_localctx.lower = Match(INTEGER);
-				State = 31;
-				Match(T__4);
-				State = 32;
-				_localctx.upper = Match(INTEGER);
-				State = 33;
-				Match(T__5);
-				}
-				break;
-			case 2:
-				EnterOuterAlt(_localctx, 2);
-				{
-				State = 34;
-				Match(T__6);
-				State = 35;
-				_localctx.upper = Match(INTEGER);
-				State = 36;
-				Match(T__5);
-				}
-				break;
-			case 3:
-				EnterOuterAlt(_localctx, 3);
-				{
-				State = 37;
-				Match(T__3);
-				State = 38;
-				_localctx.lower = Match(INTEGER);
-				State = 39;
-				Match(T__7);
-				}
-				break;
+			State = 42;
+			Match(T__5);
 			}
 		}
 		catch (RecognitionException re) {
@@ -319,17 +315,8 @@ public partial class StructureQLParser : Parser {
 
 	public partial class PropertyContext : ParserRuleContext {
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode STRING() { return GetToken(StructureQLParser.STRING, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public RecursiveMatchAllContext recursiveMatchAll() {
-			return GetRuleContext<RecursiveMatchAllContext>(0);
-		}
-		[System.Diagnostics.DebuggerNonUserCode] public SimpleMatchAllContext simpleMatchAll() {
-			return GetRuleContext<SimpleMatchAllContext>(0);
-		}
-		[System.Diagnostics.DebuggerNonUserCode] public ObjectContext @object() {
-			return GetRuleContext<ObjectContext>(0);
-		}
-		[System.Diagnostics.DebuggerNonUserCode] public ArrayContext array() {
-			return GetRuleContext<ArrayContext>(0);
+		[System.Diagnostics.DebuggerNonUserCode] public PartContext part() {
+			return GetRuleContext<PartContext>(0);
 		}
 		public PropertyContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -359,56 +346,114 @@ public partial class StructureQLParser : Parser {
 		PropertyContext _localctx = new PropertyContext(Context, State);
 		EnterRule(_localctx, 6, RULE_property);
 		try {
-			State = 51;
+			State = 48;
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,4,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 42;
+				State = 44;
 				Match(STRING);
 				}
 				break;
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 43;
+				State = 45;
 				Match(STRING);
-				State = 44;
-				Match(T__8);
-				State = 49;
-				ErrorHandler.Sync(this);
-				switch (TokenStream.LA(1)) {
-				case T__9:
-					{
-					State = 45;
-					recursiveMatchAll();
-					}
-					break;
-				case T__10:
-					{
-					State = 46;
-					simpleMatchAll();
-					}
-					break;
-				case T__0:
-					{
-					State = 47;
-					@object();
-					}
-					break;
-				case T__3:
-				case T__6:
-					{
-					State = 48;
-					array();
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
-				}
+				State = 46;
+				Match(T__6);
+				State = 47;
+				part();
 				}
 				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class PartContext : ParserRuleContext {
+		[System.Diagnostics.DebuggerNonUserCode] public RecursiveMatchAllContext recursiveMatchAll() {
+			return GetRuleContext<RecursiveMatchAllContext>(0);
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public SimpleMatchAllContext simpleMatchAll() {
+			return GetRuleContext<SimpleMatchAllContext>(0);
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public ArrayContext array() {
+			return GetRuleContext<ArrayContext>(0);
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public ObjectContext @object() {
+			return GetRuleContext<ObjectContext>(0);
+		}
+		public PartContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_part; } }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			IStructureQLListener typedListener = listener as IStructureQLListener;
+			if (typedListener != null) typedListener.EnterPart(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			IStructureQLListener typedListener = listener as IStructureQLListener;
+			if (typedListener != null) typedListener.ExitPart(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IStructureQLVisitor<TResult> typedVisitor = visitor as IStructureQLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPart(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public PartContext part() {
+		PartContext _localctx = new PartContext(Context, State);
+		EnterRule(_localctx, 8, RULE_part);
+		try {
+			State = 54;
+			ErrorHandler.Sync(this);
+			switch (TokenStream.LA(1)) {
+			case T__7:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 50;
+				recursiveMatchAll();
+				}
+				break;
+			case T__8:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 51;
+				simpleMatchAll();
+				}
+				break;
+			case T__0:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 52;
+				array();
+				}
+				break;
+			case T__3:
+				EnterOuterAlt(_localctx, 4);
+				{
+				State = 53;
+				@object();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -458,29 +503,29 @@ public partial class StructureQLParser : Parser {
 	[RuleVersion(0)]
 	public MatchContext match() {
 		MatchContext _localctx = new MatchContext(Context, State);
-		EnterRule(_localctx, 8, RULE_match);
+		EnterRule(_localctx, 10, RULE_match);
 		try {
-			State = 56;
+			State = 59;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
-			case T__9:
+			case T__7:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 53;
+				State = 56;
 				recursiveMatchAll();
 				}
 				break;
-			case T__10:
+			case T__8:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 54;
+				State = 57;
 				simpleMatchAll();
 				}
 				break;
 			case STRING:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 55;
+				State = 58;
 				property();
 				}
 				break;
@@ -526,12 +571,12 @@ public partial class StructureQLParser : Parser {
 	[RuleVersion(0)]
 	public RecursiveMatchAllContext recursiveMatchAll() {
 		RecursiveMatchAllContext _localctx = new RecursiveMatchAllContext(Context, State);
-		EnterRule(_localctx, 10, RULE_recursiveMatchAll);
+		EnterRule(_localctx, 12, RULE_recursiveMatchAll);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 58;
-			Match(T__9);
+			State = 61;
+			Match(T__7);
 			}
 		}
 		catch (RecognitionException re) {
@@ -572,12 +617,59 @@ public partial class StructureQLParser : Parser {
 	[RuleVersion(0)]
 	public SimpleMatchAllContext simpleMatchAll() {
 		SimpleMatchAllContext _localctx = new SimpleMatchAllContext(Context, State);
-		EnterRule(_localctx, 12, RULE_simpleMatchAll);
+		EnterRule(_localctx, 14, RULE_simpleMatchAll);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 60;
-			Match(T__10);
+			State = 63;
+			Match(T__8);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class NumberContext : ParserRuleContext {
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode INTEGER() { return GetToken(StructureQLParser.INTEGER, 0); }
+		public NumberContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_number; } }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			IStructureQLListener typedListener = listener as IStructureQLListener;
+			if (typedListener != null) typedListener.EnterNumber(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			IStructureQLListener typedListener = listener as IStructureQLListener;
+			if (typedListener != null) typedListener.ExitNumber(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IStructureQLVisitor<TResult> typedVisitor = visitor as IStructureQLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNumber(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public NumberContext number() {
+		NumberContext _localctx = new NumberContext(Context, State);
+		EnterRule(_localctx, 16, RULE_number);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 65;
+			Match(INTEGER);
 			}
 		}
 		catch (RecognitionException re) {
@@ -592,24 +684,25 @@ public partial class StructureQLParser : Parser {
 	}
 
 	private static int[] _serializedATN = {
-		4,1,14,63,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,1,0,
-		1,0,3,0,17,8,0,1,1,1,1,1,1,1,1,5,1,23,8,1,10,1,12,1,26,9,1,1,1,1,1,1,2,
-		1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,41,8,2,1,3,1,3,1,3,1,3,1,3,
-		1,3,1,3,3,3,50,8,3,3,3,52,8,3,1,4,1,4,1,4,3,4,57,8,4,1,5,1,5,1,6,1,6,1,
-		6,0,0,7,0,2,4,6,8,10,12,0,0,65,0,16,1,0,0,0,2,18,1,0,0,0,4,40,1,0,0,0,
-		6,51,1,0,0,0,8,56,1,0,0,0,10,58,1,0,0,0,12,60,1,0,0,0,14,17,3,8,4,0,15,
-		17,3,2,1,0,16,14,1,0,0,0,16,15,1,0,0,0,17,1,1,0,0,0,18,19,5,1,0,0,19,24,
-		3,8,4,0,20,21,5,2,0,0,21,23,3,8,4,0,22,20,1,0,0,0,23,26,1,0,0,0,24,22,
-		1,0,0,0,24,25,1,0,0,0,25,27,1,0,0,0,26,24,1,0,0,0,27,28,5,3,0,0,28,3,1,
-		0,0,0,29,30,5,4,0,0,30,31,5,13,0,0,31,32,5,5,0,0,32,33,5,13,0,0,33,41,
-		5,6,0,0,34,35,5,7,0,0,35,36,5,13,0,0,36,41,5,6,0,0,37,38,5,4,0,0,38,39,
-		5,13,0,0,39,41,5,8,0,0,40,29,1,0,0,0,40,34,1,0,0,0,40,37,1,0,0,0,41,5,
-		1,0,0,0,42,52,5,12,0,0,43,44,5,12,0,0,44,49,5,9,0,0,45,50,3,10,5,0,46,
-		50,3,12,6,0,47,50,3,2,1,0,48,50,3,4,2,0,49,45,1,0,0,0,49,46,1,0,0,0,49,
-		47,1,0,0,0,49,48,1,0,0,0,50,52,1,0,0,0,51,42,1,0,0,0,51,43,1,0,0,0,52,
-		7,1,0,0,0,53,57,3,10,5,0,54,57,3,12,6,0,55,57,3,6,3,0,56,53,1,0,0,0,56,
-		54,1,0,0,0,56,55,1,0,0,0,57,9,1,0,0,0,58,59,5,10,0,0,59,11,1,0,0,0,60,
-		61,5,11,0,0,61,13,1,0,0,0,6,16,24,40,49,51,56
+		4,1,12,68,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,
+		7,7,2,8,7,8,1,0,1,0,3,0,21,8,0,1,1,1,1,3,1,25,8,1,1,1,1,1,3,1,29,8,1,1,
+		1,1,1,1,1,1,2,1,2,1,2,1,2,5,2,38,8,2,10,2,12,2,41,9,2,1,2,1,2,1,3,1,3,
+		1,3,1,3,3,3,49,8,3,1,4,1,4,1,4,1,4,3,4,55,8,4,1,5,1,5,1,5,3,5,60,8,5,1,
+		6,1,6,1,7,1,7,1,8,1,8,1,8,0,0,9,0,2,4,6,8,10,12,14,16,0,0,68,0,20,1,0,
+		0,0,2,22,1,0,0,0,4,33,1,0,0,0,6,48,1,0,0,0,8,54,1,0,0,0,10,59,1,0,0,0,
+		12,61,1,0,0,0,14,63,1,0,0,0,16,65,1,0,0,0,18,21,3,10,5,0,19,21,3,4,2,0,
+		20,18,1,0,0,0,20,19,1,0,0,0,21,1,1,0,0,0,22,24,5,1,0,0,23,25,3,16,8,0,
+		24,23,1,0,0,0,24,25,1,0,0,0,25,26,1,0,0,0,26,28,5,2,0,0,27,29,3,16,8,0,
+		28,27,1,0,0,0,28,29,1,0,0,0,29,30,1,0,0,0,30,31,5,3,0,0,31,32,3,8,4,0,
+		32,3,1,0,0,0,33,34,5,4,0,0,34,39,3,10,5,0,35,36,5,5,0,0,36,38,3,10,5,0,
+		37,35,1,0,0,0,38,41,1,0,0,0,39,37,1,0,0,0,39,40,1,0,0,0,40,42,1,0,0,0,
+		41,39,1,0,0,0,42,43,5,6,0,0,43,5,1,0,0,0,44,49,5,12,0,0,45,46,5,12,0,0,
+		46,47,5,7,0,0,47,49,3,8,4,0,48,44,1,0,0,0,48,45,1,0,0,0,49,7,1,0,0,0,50,
+		55,3,12,6,0,51,55,3,14,7,0,52,55,3,2,1,0,53,55,3,4,2,0,54,50,1,0,0,0,54,
+		51,1,0,0,0,54,52,1,0,0,0,54,53,1,0,0,0,55,9,1,0,0,0,56,60,3,12,6,0,57,
+		60,3,14,7,0,58,60,3,6,3,0,59,56,1,0,0,0,59,57,1,0,0,0,59,58,1,0,0,0,60,
+		11,1,0,0,0,61,62,5,8,0,0,62,13,1,0,0,0,63,64,5,9,0,0,64,15,1,0,0,0,65,
+		66,5,11,0,0,66,17,1,0,0,0,7,20,24,28,39,48,54,59
 	};
 
 	public static readonly ATN _ATN =

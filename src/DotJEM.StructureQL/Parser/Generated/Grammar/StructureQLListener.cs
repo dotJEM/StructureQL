@@ -42,16 +42,6 @@ public interface IStructureQLListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitQuery([NotNull] StructureQLParser.QueryContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="StructureQLParser.object"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterObject([NotNull] StructureQLParser.ObjectContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="StructureQLParser.object"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitObject([NotNull] StructureQLParser.ObjectContext context);
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="StructureQLParser.array"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -62,6 +52,16 @@ public interface IStructureQLListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitArray([NotNull] StructureQLParser.ArrayContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="StructureQLParser.object"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterObject([NotNull] StructureQLParser.ObjectContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="StructureQLParser.object"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitObject([NotNull] StructureQLParser.ObjectContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="StructureQLParser.property"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -71,6 +71,16 @@ public interface IStructureQLListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitProperty([NotNull] StructureQLParser.PropertyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="StructureQLParser.part"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPart([NotNull] StructureQLParser.PartContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="StructureQLParser.part"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPart([NotNull] StructureQLParser.PartContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="StructureQLParser.match"/>.
 	/// </summary>
@@ -101,5 +111,15 @@ public interface IStructureQLListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitSimpleMatchAll([NotNull] StructureQLParser.SimpleMatchAllContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="StructureQLParser.number"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNumber([NotNull] StructureQLParser.NumberContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="StructureQLParser.number"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNumber([NotNull] StructureQLParser.NumberContext context);
 }
 } // namespace DotJEM.StructureQL.Generated.Parser
