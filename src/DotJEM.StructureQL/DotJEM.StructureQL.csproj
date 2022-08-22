@@ -1,33 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<PackageProjectUrl>https://github.com/dotJEM/StructureQL</PackageProjectUrl>
-	<RepositoryUrl>https://github.com/dotJEM/StructureQL</RepositoryUrl>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<RepositoryType>git</RepositoryType>
-	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<IncludeSymbols>True</IncludeSymbols>
-	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageProjectUrl>https://github.com/dotJEM/StructureQL</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/dotJEM/StructureQL</RepositoryUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<Copyright>Copyright © DotJEM 2022</Copyright>
+		<Company>N/A</Company>
+		<PackageVersion></PackageVersion>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Grammar\**" />
-    <EmbeddedResource Remove="Grammar\**" />
-    <None Remove="Grammar\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Grammar\**" />
+		<EmbeddedResource Remove="Grammar\**" />
+		<None Remove="Grammar\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.10.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Antlr4.Runtime.Standard" Version="4.10.1" />
+	</ItemGroup>
 
 </Project>
