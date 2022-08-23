@@ -143,7 +143,30 @@ Result:
       }
     ]
 }
+```
 
+----
+
+**Return id, name and links with only the url property**  
+`{id,name,links:{url} }`
+
+Result:
+```json
+{
+    "id": "GPL-2.0",
+    "name": "GNU General Public License, Version 2.0",
+    "links": [
+      {
+        "url": "https://tldrlegal.com/license/gnu-general-public-license-v2"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/GNU_General_Public_License"
+      },
+      {
+        "url": "https://opensource.org/licenses/GPL-2.0"
+      }
+    ]
+}
 
 
 
