@@ -62,29 +62,29 @@ Given the following JSON:
 
 Using DotJEM.StructureQL.Json, we can query into the document with the following queries:
 
-Return the entire document:
+**Return the entire document: ** 
 `**` or `{**}`
 
 ----
 
-Return only top level primitive fields:
+**Return only top level primitive fields:**  
 `*` or `{*}`
 
 ----
 
-Return specific named properties:
+**Return specific named properties:**  
 `{id,name}`
 
 ----
 
-Return id, name and all identifiers:
-`{id,name,identifiers:*}`, `{id,name,identifiers:**}`, `{id,name,identifiers:{*}}` or `{id,name,identifiers:{**}}`
+**Return id, name and all identifiers:**  
+`{id,name,identifiers:*}`, `{id,name,identifiers:**}`, `{id,name,identifiers:{*}}` or `{id,name,identifiers:{**}}`  
 Because each of the identifier objects only has top level promitives, both `*` and `**` works the same here, if there was nested properties and we wanted the full identifier objects we either need to use `**`/`{**}` or query specifically for properties and child properties of the object.
 
 ----
 
-Return id, name and a range of identifiers:
-`{id,name,identifiers:[0..1]*}`, `{id,name,identifiers:[0..1]**}`, `{id,name,identifiers:[0..1]{*}}` or `{id,name,identifiers:[0..1]{**}}`
+**Return id, name and a range of identifiers:**  
+`{id,name,identifiers:[0..1]*}`, `{id,name,identifiers:[0..1]**}`, `{id,name,identifiers:[0..1]{*}}` or `{id,name,identifiers:[0..1]{**}}`  
 If we know a property is an array, we can add `[<from>..<to>]` in front of the query on that object to select only a number of items in the array.
 Both from and to are optional, where `[1..]` selects elements from index 1 and up, `[..1]` selects element 0 and 1 and `[..]` means all and is redundant to just leaving it out.
 
