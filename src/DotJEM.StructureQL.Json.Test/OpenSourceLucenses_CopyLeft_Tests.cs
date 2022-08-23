@@ -15,6 +15,9 @@ namespace DotJEM.StructureQL.Json.Test
         [TestCase("{ id, name, superseded_by, text:** }")]
         [TestCase("{ id, name, superseded_by, links: { note } }")]
         [TestCase("{ id, name, superseded_by, links: [0..1] { note } }")]
+        [TestCase("{ id, name, superseded_by, links: [..1] { note } }")]
+        [TestCase("{ id, name, superseded_by, links: [0..] { note } }")]
+        [TestCase("{ id, name, superseded_by, links: [..] { note } }")]
         public void Query_Document_ReturnsExpected(string selector)
         {
             JArray list = TestObjects.TestObjects.Load<JArray>("OpenSourceLicenses_Copyleft.json");

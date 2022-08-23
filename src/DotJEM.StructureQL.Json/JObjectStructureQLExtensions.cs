@@ -10,11 +10,11 @@ public static class JObjectStructureQLExtensions
 
     public static JObject Query(this JObject json, IStructureQuery query)
     {
-        return service.Filter(json, query);
+        return service.Query(json, query);
     }
     public static JObject Query(this JObject json, string select)
     {
-        return service.Filter(json, parser.Parse(select));
+        return service.Query(json, parser.Parse(select));
     }
 
 }

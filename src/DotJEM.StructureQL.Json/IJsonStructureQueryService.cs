@@ -6,12 +6,12 @@ namespace DotJEM.StructureQL.Json;
 
 public interface IJsonStructureQueryService
 {
-    JObject Filter(JObject json, IStructureQuery query);
+    JObject Query(JObject json, IStructureQuery query);
 }
 
 public class JsonStructureQueryService : IJsonStructureQueryService
 {
-    public JObject Filter(JObject json, IStructureQuery query)
+    public JObject Query(JObject json, IStructureQuery query)
     {
         JObject filtered = new JObject();
         foreach (JProperty property in json.Properties())
@@ -30,7 +30,7 @@ public class JsonStructureQueryService : IJsonStructureQueryService
                 filtered.Add(property.Name, FilterArray(jArray, query));
                 break;
             case JObject jObject:
-                filtered.Add(property.Name, Filter(jObject, query));
+                filtered.Add(property.Name, Query(jObject, query));
                 break;
             case JValue jValue:
                 filtered.Add(property.Name, jValue);
@@ -54,7 +54,7 @@ public class JsonStructureQueryService : IJsonStructureQueryService
                     filteredArray.Add(FilterArray(jArray, query));
                     break;
                 case JObject jObject:
-                    filteredArray.Add(Filter(jObject, query));
+                    filteredArray.Add(Query(jObject, query));
                     break;
                 case JValue jValue:
                     filteredArray.Add(jValue);
