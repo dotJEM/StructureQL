@@ -64,17 +64,25 @@ Using DotJEM.StructureQL.Json, we can query into the document with the following
 
 Return the entire document:
 `**` or `{**}`
+
 ----
+
 Return only top level primitive fields:
 `*` or `{*}`
+
 ----
+
 Return specific named properties:
 `{id,name}`
+
 ----
+
 Return id, name and all identifiers:
 `{id,name,identifiers:*}`, `{id,name,identifiers:**}`, `{id,name,identifiers:{*}}` or `{id,name,identifiers:{**}}`
 Because each of the identifier objects only has top level promitives, both `*` and `**` works the same here, if there was nested properties and we wanted the full identifier objects we either need to use `**`/`{**}` or query specifically for properties and child properties of the object.
+
 ----
+
 Return id, name and a range of identifiers:
 `{id,name,identifiers:[0..1]*}`, `{id,name,identifiers:[0..1]**}`, `{id,name,identifiers:[0..1]{*}}` or `{id,name,identifiers:[0..1]{**}}`
 If we know a property is an array, we can add `[<from>..<to>]` in front of the query on that object to select only a number of items in the array.
