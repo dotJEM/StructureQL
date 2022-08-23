@@ -70,6 +70,11 @@ Using DotJEM.StructureQL.Json, we can query into the document with the following
 **Return only top level primitive fields:**  
 `*` or `{*}`
 
+Code
+```
+JObject result = json.Query("*");
+```
+
 Result:
 ```json
 {
@@ -84,6 +89,11 @@ Result:
 **Return specific named properties:**  
 `{id,name}`
 
+Code
+```
+JObject result = json.Query("{id,name}");
+```
+
 Result:
 ```json
 {
@@ -97,6 +107,11 @@ Result:
 **Return id, name and all identifiers:**  
 `{id,name,identifiers:*}`, `{id,name,identifiers:**}`, `{id,name,identifiers:{*}}` or `{id,name,identifiers:{**}}`  
 Because each of the identifier objects only has top level promitives, both `*` and `**` works the same here, if there was nested properties and we wanted the full identifier objects we either need to use `**`/`{**}` or query specifically for properties and child properties of the object.
+
+Code
+```
+JObject result = json.Query("{id,name,identifiers:*}");
+```
 
 Result:
 ```json
@@ -127,6 +142,11 @@ Result:
 If we know a property is an array, we can add `[<from>..<to>]` in front of the query on that object to select only a number of items in the array.
 Both from and to are optional, where `[1..]` selects elements from index 1 and up, `[..1]` selects element 0 and 1 and `[..]` means all and is redundant to just leaving it out.
 
+Code
+```
+JObject result = json.Query("{id,name,identifiers:[0..1]*}");
+```
+
 Result:
 ```json
 {
@@ -150,6 +170,11 @@ Result:
 **Return id, name and links with only the url property**  
 `{id,name,links:{url} }`
 
+Code
+```
+JObject result = json.Query("{id,name,links:{url} }");
+```
+
 Result:
 ```json
 {
@@ -167,6 +192,18 @@ Result:
       }
     ]
 }
+```
+
+----
+
+All the above queries the objects via an extension method, when querying multiple objects its worth reusing the parsed query so it's not parsed over and over again:
+
+
+Code
+```
+IStructureQuery query = StructureQL.Parse("{id,name,links:{url} }");
+var result = listOfJObjects.Select(json => json.Query(query));
+```
 
 
 
