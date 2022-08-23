@@ -71,7 +71,7 @@ Using DotJEM.StructureQL.Json, we can query into the document with the following
 `*` or `{*}`
 
 Code
-```
+```CSharp
 JObject result = json.Query("*");
 ```
 
@@ -90,7 +90,7 @@ Result:
 `{id,name}`
 
 Code
-```
+```CSharp
 JObject result = json.Query("{id,name}");
 ```
 
@@ -109,7 +109,7 @@ Result:
 Because each of the identifier objects only has top level promitives, both `*` and `**` works the same here, if there was nested properties and we wanted the full identifier objects we either need to use `**`/`{**}` or query specifically for properties and child properties of the object.
 
 Code
-```
+```CSharp
 JObject result = json.Query("{id,name,identifiers:*}");
 ```
 
@@ -143,7 +143,7 @@ If we know a property is an array, we can add `[<from>..<to>]` in front of the q
 Both from and to are optional, where `[1..]` selects elements from index 1 and up, `[..1]` selects element 0 and 1 and `[..]` means all and is redundant to just leaving it out.
 
 Code
-```
+```CSharp
 JObject result = json.Query("{id,name,identifiers:[0..1]*}");
 ```
 
@@ -171,7 +171,7 @@ Result:
 `{id,name,links:{url} }`
 
 Code
-```
+```CSharp
 JObject result = json.Query("{id,name,links:{url} }");
 ```
 
@@ -200,7 +200,7 @@ All the above queries the objects via an extension method, when querying multipl
 
 
 Code
-```
+```CSharp
 IStructureQuery query = StructureQL.Parse("{id,name,links:{url} }");
 var result = listOfJObjects.Select(json => json.Query(query));
 ```
