@@ -1,1 +1,1 @@
-java -jar %~dp0\antlr-4.10.1-complete.jar %*
+java -jar %~dp0\antlr-4.9.2-complete.jar %*
