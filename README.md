@@ -60,9 +60,11 @@ Given the following JSON:
 }
 ```
 
+
+----
 Using DotJEM.StructureQL.Json, we can query into the document with the following queries:
 
-**Return the entire document: ** 
+**Return the entire document: **  
 `**` or `{**}`
 
 ----
