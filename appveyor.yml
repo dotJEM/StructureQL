@@ -4,7 +4,7 @@ image: Visual Studio 2022
 configuration: Release
 
 init:
-- ps: Update-AppveyorBuild -Version "$env:appveyor_build_version+build.{build}+sha.$($env:appveyor_repo_commit.substring(0,8))"
+- ps: Update-AppveyorBuild -Version "$env:appveyor_build_version+build.88.sha.$($env:appveyor_repo_commit.substring(0,8))"
 
 nuget:
   disable_publish_on_pr: true
